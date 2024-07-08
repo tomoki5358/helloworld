@@ -4,11 +4,11 @@ DesignPattern: {
 	name:        "helloworld"
 	description: "helloworld"
 	parameters: {
-		replicas: int
-		imageName: string
+		replicas:     int
+		imageName:    string
 		k8sNamespace: string
-}
-	
+	}
+
 	resources: app: {
 		resource0: {
 			apiVersion: "apps/v1"
@@ -21,7 +21,7 @@ DesignPattern: {
 					metadata: {
 						labels: app: "flask-app"
 						namespace: parameters.k8sNamespace
-}
+					}
 					spec: containers: [{
 						name:  "flask-app"
 						image: parameters.imageName
@@ -40,9 +40,9 @@ DesignPattern: {
 			apiVersion: "v1"
 			kind:       "Service"
 			metadata: {
-				name: "flask-app-service"
+				name:      "flask-app-service"
 				namespace: parameters.k8sNamespace
-}
+			}
 			spec: {
 				selector: app: "flask-app"
 				ports: [{

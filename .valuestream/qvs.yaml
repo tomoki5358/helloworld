@@ -1,6 +1,13 @@
 modules:
-  - name: github.com/tomoki5358/sample-flask
-    revision: main
+  - name: github.com/tomoki5358/helloworld
+    # if use local adapter. you alternative to use below
+    # local:
+    #   path: .
+    # if use remote adapter. when compile cloning to adapter from github
+    remote:
+      repo: https://github.com/tomoki5358/helloworld.git
+      revision: main
+      path: .valuestream
   - name: qmonus.net/adapter/official
     remote:
       repo: https://github.com/qmonus/official-cloud-native-adapters.git
@@ -17,7 +24,7 @@ params:
 
 designPatterns:
   # infrastructure adapter
-  - pattern: github.com/tomoki5358/helloworld:helloworld
+  - pattern: github.com/tomoki5358/helloworld/helloworld
     params:
       replicas: $(params.replicas)
       imageName: $(params.imageName)
