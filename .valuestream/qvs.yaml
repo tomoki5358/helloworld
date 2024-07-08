@@ -1,0 +1,28 @@
+modules:
+  - name: github.com/tomoki5358/sample-flask
+    revision: main
+  - name: qmonus.net/adapter/official
+    remote:
+      repo: https://github.com/qmonus/official-cloud-native-adapters.git
+      revision: v0.30.0
+      path: .    
+
+params:
+  - name: replicas
+    type: int
+  - name: k8sNamespace
+    type: string
+  - name: imageName
+    type: string
+
+designPatterns:
+  # infrastructure adapter
+  - pattern: github.com/tomoki5358/helloworld:helloworld
+    params:
+      replicas: $(params.replicas)
+      imageName: $(params.imageName)
+      k8sNamespace: $(params.k8sNamespace)
+  # CI/CD Adapter
+  - pattern: qmonus.net/adapter/official/pipeline/build:buildkitGcp
+  - pattern: qmonus.net/adapter/official/pipeline/deploy:simple
+  - pattern: qmonus.net/adapter/official/pipeline/utils:imagePromoteGcp  
