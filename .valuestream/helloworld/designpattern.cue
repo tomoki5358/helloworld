@@ -1,10 +1,14 @@
 package helloworld
 
+import (
+	"strconv"
+)
+
 DesignPattern: {
 	name:        "helloworld"
 	description: "helloworld"
 	parameters: {
-		replicas:     int
+		replicas:     string
 		imageName:    string
 		k8sNamespace: string
 	}
@@ -15,7 +19,7 @@ DesignPattern: {
 			kind:       "Deployment"
 			metadata: name: "flask-app"
 			spec: {
-				replicas: parameters.replicas
+				replicas: strconv.Atoi(parameters.replicas)
 				selector: matchLabels: app: "flask-app"
 				template: {
 					metadata: {
